@@ -6,7 +6,8 @@ static const Block blocks[] = {
 	{"",             "sb_network_traffic",               1,              16},
 	{"",                      "sb_memory",              10,              14},
 	{"",                    "sb_cpu_temp",              10,              18},
-	{"",                    "sb_internet",               5,               4},
+	{"",                        "sb_wifi",               5,               4},
+	{"",                    "sb_ethernet",               5,               4},
 	{"",                       "sb_clock",              60,               1},
 };
 
