@@ -1,0 +1,3 @@
+#!/bin/sh
+
+printf '%s %s%s' '💡' $((100*$(brightnessctl get)/$(brightnessctl max))) '%'
