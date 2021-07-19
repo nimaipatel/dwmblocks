@@ -12,8 +12,9 @@ clean:
 	rm -f *.o *.gch dwmblocks blocks.h
 install: output
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/* $(DESTDIR)$(PREFIX)/bin
+	mkdir -p $(DESTDIR)$(PREFIX)/share/dwmblocks
 	install -m 0755 dwmblocks $(DESTDIR)$(PREFIX)/bin/dwmblocks
+	cp -f scripts/* $(DESTDIR)$(PREFIX)/share/dwmblocks
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/dwmblocks
-	rm -f $(DESTDIR)$(PREFIX)/bin/sb_*
+	rm -rf $(DESTDIR)$(PREFIX)/share/dwmblocks
