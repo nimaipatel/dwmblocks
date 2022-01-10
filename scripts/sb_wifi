@@ -9,7 +9,7 @@ NAME=$(echo "$WIFI" | cut -d: -f2)
 SIGL=$(echo "$WIFI" | cut -d: -f3)
 
 if [ -z "$WIFI" ]; then
-	echo "📡 (0%)"
+	echo "^C8^睊 (0%)^d^"
 else
-	echo "📶 $NAME ($SIGL%)"
+	echo "^C2^直 $NAME ($SIGL%)^d^"
 fi

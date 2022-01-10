@@ -1,3 +1,5 @@
 #!/bin/sh
 
-free --mebi | sed -n '2{p;q}' | awk '{printf "🧠 %2.2fGiB/%2.2fGib\n", ( $3 / 1024), ( $2 / 1024 )}'
+math() { awk "BEGIN{printf $1}"; }
+P=$(math "$(free --mebi | sed -n '2{p;q}' | awk '{printf "(%f/%f) * 100", ( $3 / 1024), ( $2 / 1024 )}')")
+printf "^B3^^C0^ MEM %2.2f%%" "$P"

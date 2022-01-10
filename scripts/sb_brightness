@@ -1,3 +1,3 @@
 #!/bin/sh
 
-printf '%s %s%s' '💡' $((100*$(brightnessctl get)/$(brightnessctl max))) '%'
+printf '^C3^%s %s%s^d^' 'ﯦ' $((100 * $(brightnessctl get) / $(brightnessctl max))) '%'

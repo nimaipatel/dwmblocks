@@ -1,27 +1,33 @@
 #!/bin/sh
 
-for BAT in /sys/class/power_supply/BAT?;
-do
+for BAT in /sys/class/power_supply/BAT?; do
 	CAPACITY=$(cat "$BAT/capacity")
 	STATUS=$(cat "$BAT/status")
 
 	case $STATUS in
-		[cC]harging)
-			SYM="🔌"
-			;;
-		[dD]ischarging)
-			SYM="🔋"
-			;;
-		[nN]ot\ charging)
-			SYM="🛑"
-			;;
-		[fF]ull)
-			SYM="⚡"
-			;;
-		* )
-			CHARSYM=""
-			;;
+	[cC]harging)
+		SYM='^C3^ﮣ'
+		;;
+	[dD]ischarging)
+		if [ "$CAPACITY" -gt 80 ]; then
+			SYM='^C2^'
+		elif [ "$CAPACITY" -gt 60 ]; then
+			SYM='^C2^'
+		elif [ "$CAPACITY" -gt 40 ]; then
+			SYM='^C2^'
+		elif [ "$CAPACITY" -gt 20 ]; then
+			SYM='^C3^'
+		else
+			SYM='^C1^'
+		fi
+		;;
+	[nN]ot\ charging)
+		SYM='^C1^'
+		;;
+	[fF]ull)
+		SYM="^C2^"
+		;;
 	esac
 
-	printf "%s %s%%" "$SYM" "$CAPACITY"
+	printf "%s  %s%%^d^" "$SYM" "$CAPACITY"
 done

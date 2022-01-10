@@ -3,13 +3,20 @@
 LOGFILE="${XDG_CACHE_HOME:-$HOME/.cache}/netlog"
 PREVDATA="$(cat "$LOGFILE")"
 
-RXCURR="$(( $(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+') ))"
-TXCURR="$(( $(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+') ))"
+RXCURR="$(($(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+')))"
+TXCURR="$(($(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+')))"
 
-[ ! -f "$LOGFILE" ] && echo "$RXCURR $TXCURR" > "$LOGFILE" && exit
+[ ! -f "$LOGFILE" ] && echo "$RXCURR $TXCURR" >"$LOGFILE" && exit
 
-printf "🔻 %sKiB 🔺 %sKiB\\n" \
-	"$(( (RXCURR - $(echo "$PREVDATA" | cut -d' ' -f 1)) / 1024 ))" \
-	"$(( (TXCURR - $(echo "$PREVDATA" | cut -d' ' -f 2)) / 1024 ))"
+down="$(((RXCURR - $(echo "$PREVDATA" | cut -d' ' -f 1)) / 1024))"
+up="$(((TXCURR - $(echo "$PREVDATA" | cut -d' ' -f 2)) / 1024))"
 
-echo "$RXCURR $TXCURR" > "$LOGFILE"
+if [ "$down" = 0 ] && [ "$up" = 0 ]; then
+	printf '^C8^'
+else
+	printf '^C4^'
+fi
+
+printf " %sKiB  %sKiB^d^\\n" "$down" "$up"
+
+echo "$RXCURR $TXCURR" >"$LOGFILE"
