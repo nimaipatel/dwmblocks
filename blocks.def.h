@@ -2,7 +2,9 @@
 static const Block blocks[] = {
 	/*Icon*/	/*Command*/              /*Update Interval*/  /*Update Signal*/
 	{"",          "/usr/local/share/dwmblocks/sb_battery",   5,   3},
+	/* I set separate volumes for different inputs so this is confusing in the status bar
 	{"",           "/usr/local/share/dwmblocks/sb_volume",   0,  10},
+	*/
 	{"",       "/usr/local/share/dwmblocks/sb_brightness",   0,  19},
 	{"",           "/usr/local/share/dwmblocks/sb_memory",  10,  14},
 	{"",         "/usr/local/share/dwmblocks/sb_cpu_bars",  10,  18},
